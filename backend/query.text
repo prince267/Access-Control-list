@@ -1,0 +1,14 @@
+ // To get user and its group 
+ select user_group.group_id , group_name from user_group,groups where user_id=1 and user_group.group_id=groups.group_id;
+
+//To get folders corresponding to user
+
+select user_id,parent_folder_id,child_folder_name,child_folder_id,folder_in_folder.permission_id,descrp,path_name from folder_in_folder,permission,folders 
+where user_id=3 and child_folder_id=folder_id and folder_in_folder.permission_id=permission.permission_id;
+
+//To get files corresponding to user
+
+select user_id, parent_folder_id, folders.path_name, child_file_name, child_file_id, files.path_name, descrp from file_in_folder,folders,files,permission 
+where user_id=1 and parent_folder_id=folder_id and child_file_id=file_id and file_in_folder.permission_id=permission.permission_id;
+
+

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<script>
+
+		// var arry = [
+		// 	{ "user_id": 1000, "parent_folder_id": 2, "parent_folder_path": "/ACL/folder1", "name": "hello.txt", "id": 3000, "permission_id": 1, "permission_descrp": "READ", "path_name": "/ACL/folder1/hello.txt", "type": "File" },
+		// 	{ "user_id": 1000, "parent_folder_id": 2, "parent_folder_path": "/ACL/folder1", "name": "test.txt", "id": 3001, "permission_id": 2, "permission_descrp": "READ,WRITE", "path_name": "/ACL/folder1/test.txt", "type": "File" },
+		// 	{ "user_id": 1000, "parent_folder_id": 5, "parent_folder_path": "/ACL/folder3/folder4", "name": "third.txt", "id": 3003, "permission_id": 2, "permission_descrp": "READ,WRITE", "path_name": "/ACL/folder3/folder4/third.txt", "type": "File" }]
+
+		// var folders1 = [
+		// 	{ "user_id": 1000, "parent_folder_id": 0, "parent_folder_path": "/ACL", "name": "folder1", "id": 2, "permission_id": 1, "permission_descrp": "READ", "path_name": "/ACL/folder1", "type": "Folder" },
+		// 	{ "user_id": 1000, "parent_folder_id": 0, "parent_folder_path": "/ACL", "name": "folder3", "id": 4, "permission_id": 1, "permission_descrp": "READ", "path_name": "/ACL/folder3", "type": "Folder" },
+		// 	{ "user_id": 1000, "parent_folder_id": 4, "parent_folder_path": "/ACL/folder3", "name": "folder4", "id": 5, "permission_id": 1, "permission_descrp": "READ", "path_name": "/ACL/folder3/folder4", "type": "Folder" }]
+
+		// var folders = arry.concat(folders1)
+		// console.log(folders)
+		// // function convert(array) {
+		// // 	var map = {}
+		// // 	for (let i = 0; i < array.length; i++) {
+		// // 		let obj = array[i]
+		// // 		if (!(obj.parent_folder_id in map)) {
+		// // 			map[obj.parent_folder_id] = {}
+		// // 			map[obj.parent_folder_id].files = []
+		// // 		}
+
+		// // 	}
+		// // 	for (let i = 0; i < array.length; i++) {
+		// // 		let obj = array[i]
+		// // 		map[obj.parent_folder_id].files.push(obj)
+		// // 	}
+
+		// // 	return map;
+		// // }
+		// // var files = convert(arry)
+
+		// // // console.log(JSON.stringify(files))
+
+
+		// var id = []
+		// var p = []
+		// console.log(folders.length)
+		// for (let i = 0; i < folders.length; i++) {
+		// 	id = id.concat(folders[i].id)
+		// 	p = p.concat(folders[i].parent_folder_id)
+		// 	// if (!(folders[i].parent_folder_id in p)) {
+		// 	// 	console.log(folders[i].parent_folder_id)
+		// 	// 	p = p.concat(folders[i].parent_folder_id)
+		// 	// }
+		// }
+		// var headP = []
+		// for (let i = 0; i < p.length; i++) {
+		// 	if (id.indexOf(p[i]) == -1) {
+		// 		headP = headP.concat(p[i])
+		// 	}
+		// }
+
+		// console.log("id are ", id);
+		// console.log("parent s", p)
+		// console.log("headparent", headP)
+		// function convert1(array) {
+		// 	var map = {}
+		// 	for (var i = 0; i < array.length; i++) {
+		// 		var obj = array[i]
+		// 		if (!(obj.id in map)) {
+		// 			map[obj.id] = obj
+		// 			map[obj.id].children = []
+		// 		}
+
+		// 		if (typeof map[obj.id].name == 'undefined') {
+		// 			map[obj.id].user_id = obj.user_id
+		// 			map[obj.id].parent_folder_id = obj.parent_folder_id
+		// 			map[obj.id].parent_folder_path = obj.parent_folder_path
+		// 			map[obj.id].name = obj.name
+		// 			map[obj.id].id = obj.id
+		// 			map[obj.id].permission_id = obj.permission_id
+		// 			map[obj.id].permission_descrp = obj.permission_descrp
+		// 			map[obj.id].path_name = obj.path_name
+		// 			map[obj.id].type = obj.type
+		// 		}
+
+		// 		if (headP.indexOf(obj.parent_folder_id) > -1) {
+		// 			var parent = '-'
+		// 		}
+		// 		else {
+		// 			var parent = obj.parent_folder_id
+
+		// 		}
+
+		// 		if (!(parent in map)) {
+		// 			map[parent] = {}
+		// 			map[parent].children = []
+		// 		}
+
+		// 		map[parent].children.push(map[obj.id])
+		// 	}
+		// 	return map['-']
+		// }
+		// console.log(JSON.stringify(convert1(folders)))
+
+		function traverse(o) {
+			for (var i in o) {
+				// console.log("??????? ",i)
+				if (!!o[i] && typeof (o[i]) == "object") {
+					if(i!=="children"){
+						console.log(o[i].name);
+					}
+					traverse(o[i]);
+				} 
+			}
+		}
+		function hello(){
+			var o={"children":[{"user_id":1000,"parent_folder_id":2,"parent_folder_path":"ACL/folder1","name":"hello.txt","id":3000,"permission_id":1,"permission_descrp":"READ","path_name":"ACL/folder1/hello.txt","type":"File","children":[]},{"user_id":1000,"parent_folder_id":2,"parent_folder_path":"ACL/folder1","name":"test.txt","id":3001,"permission_id":2,"permission_descrp":"READ,WRITE","path_name":"ACL/folder1/test.txt","type":"File","children":[]},{"children":[{"user_id":1000,"parent_folder_id":6,"parent_folder_path":"ACL/folder1/folder0","name":"dsdsd.txt","id":3005,"permission_id":2,"permission_descrp":"READ,WRITE","path_name":"ACL/folder1/folder0/dsdsd.txt","type":"File","children":[]},{"user_id":1000,"parent_folder_id":6,"parent_folder_path":"ACL/folder1/folder0","name":"file.txt","id":3004,"permission_id":2,"permission_descrp":"READ,WRITE","path_name":"ACL/folder1/folder0/file.txt","type":"File","children":[]},{"children":[{"user_id":1000,"parent_folder_id":8,"parent_folder_path":"ACL/folder1/folder0/folder100","name":"folder100.txt","id":3006,"permission_id":2,"permission_descrp":"READ,WRITE","path_name":"ACL/folder1/folder0/folder100/folder100.txt","type":"File","children":[]}],"user_id":1000,"parent_folder_id":6,"parent_folder_path":"ACL/folder1/folder0","name":"folder100","id":8,"permission_id":2,"permission_descrp":"READ,WRITE","path_name":"ACL/folder1/folder0/folder100","type":"Folder"}],"user_id":1000,"parent_folder_id":2,"parent_folder_path":"ACL/folder1","name":"folder0","id":6,"permission_id":2,"permission_descrp":"READ,WRITE","path_name":"ACL/folder1/folder0","type":"Folder"}],"user_id":1000,"parent_folder_id":0,"parent_folder_path":"ACL","name":"folder1","id":2,"permission_id":2,"permission_descrp":"READ,WRITE","path_name":"ACL/folder1","type":"Folder"}
+		
+		traverse(o)
+		}
+		hello()
+		
+
+	</script>
+</head>
+
+<body>
+	<!-- <video controls width="500">
+
+	
+	
+		<source src="../../../prince/Downloads/-Facebook.mp4"
+				type="video/mp4">
+	
+		Sorry, your browser doesn't support embedded videos.
+	</video> -->
+
+	<h1>A Web Page</h1>
+	<p id="demo">A Paragraph</p>
+	<button type="button" onclick="myFunction()">Try it</button>
+	<aside>
+		<p>The Rough-skinned Newt defends itself with a deadly neurotoxin.</p>
+	</aside>
+
+	<p>Several species of salamander inhabit the temperate rainforest of the Pacific Northwest, including the Ensatina,
+		the Northwestern Salamander and the Rough-skinned Newt. Most salamanders are nocturnal, and hunt for insects,
+		worms and other small creatures.</p>
+
+</body>
+
+</html>
