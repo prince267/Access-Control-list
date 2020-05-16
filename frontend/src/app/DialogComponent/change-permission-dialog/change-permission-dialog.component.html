@@ -1,0 +1,24 @@
+<!-- <h1 mat-dialog-title style="text-align: center; font-weight: 500;">Group Members</h1>
+<hr> -->
+<mat-dialog-content style="width: 280px; height: 150px;" class="mat-typography">
+    <p style="font-size: larger;">Permission Allowed :
+        <span style="color: darkblue; font-weight: 400;">
+            {{data.permission_descrp}}
+        </span>
+    </p>
+    <br>
+    <p style="font-size: smaller;">* Click on Button to change Permission to
+        <span style="color: darkblue; font-weight: 400;">
+            {{data.permission_id == 1?"Read/Write":"Read"}}
+        </span>
+    </p>
+    <br>
+    <button mat-raised-button color="primary" style="width: 100%;"
+        (click)="ChangePermission(data.permission_id == 1?2:1)">
+        <span class="material-icons">
+            indeterminate_check_box
+        </span>
+        Change
+    </button>
+
+</mat-dialog-content>

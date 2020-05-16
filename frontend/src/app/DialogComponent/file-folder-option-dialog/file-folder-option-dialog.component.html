@@ -1,0 +1,23 @@
+<h1 mat-dialog-title style="text-align: center; font-weight: 500;">Chosse Folder or File</h1>
+
+<mat-dialog-content style="width: 250px; height: 180px;" class="mat-typography">
+
+<mat-radio-group
+  aria-labelledby="example-radio-group-label"
+  class="example-radio-group"
+  [(ngModel)]="Entity">
+  <mat-radio-button class="example-radio-button" *ngFor="let option of Options" [value]="option">
+    {{option}}
+  </mat-radio-button>
+</mat-radio-group>
+<mat-form-field style="margin-top: 5px;width: 250px;" appearance="outline">
+    <mat-label>File or Folder Name</mat-label>
+    <input  matInput #name placeholder="Placeholder">
+    <mat-icon matSuffix>create</mat-icon>
+  </mat-form-field>
+<!-- <div>Your favorite season is: {{Entity}}</div> -->
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="primary" (click)="closeDialog()"  >Close</button>
+    <button mat-raised-button color="primary" (click)="createEntity(name.value,Entity)"  >Create</button>  
+  </mat-dialog-actions>

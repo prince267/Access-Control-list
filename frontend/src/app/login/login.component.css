@@ -1,0 +1,18 @@
+.login-form{
+    padding: 10px;
+    position: absolute;
+  left: 33%;
+  top: 30%;
+}
+
+.login-field{
+    width: 200%;
+}
+
+.button-field{
+    width: 100%;
+    margin-left: 200px;
+}
+.mat-raised-button{
+margin-left: 170%;
+}

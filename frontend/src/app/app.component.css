@@ -1,0 +1,13 @@
+.filler {
+    flex: 1 1 auto;
+ }
+
+ .line{
+   margin-left: 15px ;
+   border-left: 2px solid white;
+   height: 60px;
+   margin-right: 10px;
+ }
+ /* .gap {
+    margin-right: 10px;
+ } */

@@ -1,0 +1,49 @@
+<h1 mat-dialog-title style="text-align: center; font-weight: 500;">User Information</h1>
+<hr>
+<mat-dialog-content style="width: 400px;" class="mat-typography">
+    <form style="width: 400px;" class="login-form" [formGroup]="registrationForm">
+        <mat-form-field  class="login-field" appearance="outline" style="align-items: center;">
+          <mat-label>First Name</mat-label>
+          <input matInput placeholder="First Name" formControlName="first_name" maxlength="20" required >
+      
+          <mat-icon matPrefix>person</mat-icon>
+          <mat-error *ngIf="first_name.hasError('required')">
+            <strong>First Name is required</strong>
+      
+          </mat-error>
+      
+        </mat-form-field>
+        <br>
+        <mat-form-field class="login-field" appearance="outline" style="align-items: center;">
+            <mat-label>Last Name</mat-label>
+            <input matInput placeholder="Last Name" formControlName="last_name" maxlength="20" required >
+        
+            <mat-icon matPrefix>person</mat-icon>
+            <mat-error *ngIf="last_name.hasError('required')">
+              <strong>Last Name is required</strong>
+        
+            </mat-error>
+        
+          </mat-form-field>
+          <br>
+        <mat-form-field class="login-field" appearance="outline">
+          <mat-label>Password</mat-label>
+          <mat-icon matPrefix>lock</mat-icon>
+          <input type="email" matInput placeholder="**********" formControlName="Password" maxlength="10" minlength="4" required>
+          <mat-hint align="end">
+            {{Password.value.length}}/10
+          </mat-hint>
+          <mat-error *ngIf="Password.hasError('required')">
+            <strong>Password is required</strong>
+          </mat-error>
+          </mat-form-field>
+          <br>
+          <br>
+        <!-- <button  style="margin-left: 145%; width: 55%;" mat-raised-button color="primary" [disabled]="!registrationForm.valid"
+          (click)="onSubmit()">Login</button> -->
+      </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button  color="primary" [disabled]="!registrationForm.valid" (click)="CreateUser()">Create</button>
+  </mat-dialog-actions>
+

@@ -1,0 +1,15 @@
+<h1 mat-dialog-title style="text-align: center; font-weight: 500;">Group Members</h1>
+<hr>
+<mat-dialog-content style="width: 400px;" class="mat-typography">
+    <mat-list>
+        <mat-list-item *ngFor="let user of users">
+          <mat-icon mat-list-icon>person</mat-icon>
+          <div mat-line style="font-size: larger;">{{user.first_name}} {{user.last_name}}</div>
+          <div mat-line style="font-size: small; color: darkslategray;">UserID : {{user.user_id}} </div>
+        </mat-list-item>
+      </mat-list>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="close()">Close</button>
+  </mat-dialog-actions>
+

@@ -1,0 +1,15 @@
+<h1 mat-dialog-title style="text-align: center; font-weight: 500;">{{data.name}}</h1>
+<hr>
+<mat-dialog-content style="width: 700px; height: 500px;" class="mat-typography">
+    <form class="example-form">  
+        <mat-form-field class="example-full-width">
+          <mat-label>Data Field</mat-label>
+          <textarea #fileDataInput class="text-field" matInput placeholder="Enter Text To File">{{FileData}}</textarea>
+        </mat-form-field>
+      </form>
+</mat-dialog-content> 
+<mat-dialog-actions align="end">
+  <button mat-raised-button color="primary" (click)="closeDialog()" >Close</button>
+  <button mat-raised-button color="primary" [disabled]="data.permission_id==1" (click)="UpdateFileData(fileDataInput.value)" >Update</button>  
+</mat-dialog-actions>
+

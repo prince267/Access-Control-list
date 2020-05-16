@@ -1,0 +1,22 @@
+.example-card {
+    
+    /* width: 70%; */
+    min-height: 78%;
+    max-height: fit-content;
+    margin-top: 40px;
+    margin-left: 5%;
+    /* margin-right: 15px; */
+    width: 40%;
+    float: left;
+  }
+
+  .example-tree-invisible {
+    display: none;
+  }
+  
+  .example-tree ul,
+  .example-tree li {
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style-type: none;
+  }

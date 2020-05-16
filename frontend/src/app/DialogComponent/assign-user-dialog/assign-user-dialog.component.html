@@ -1,0 +1,42 @@
+<h1 mat-dialog-title style="text-align: center; font-weight: 500;">Accessed User's</h1>
+<hr>
+<mat-dialog-content style="width: 400px;height: 600px;" class="mat-typography">
+    <mat-list>
+        <mat-list-item *ngFor="let user of users">
+            <mat-icon mat-list-icon>person</mat-icon>
+            <div mat-line style="font-size:medium;">UserID : {{user.user_id}} || 
+                <span style="font-size: small; color: blue;">{{user.permission_id == 1 ? "Read Permission" : "Write Permission"}}</span>  </div>
+            <!-- <div mat-line >
+            </div> -->
+        </mat-list-item>
+    </mat-list>
+    <form>
+        <hr>
+        <p style="font-size: large; font-weight: 500;margin-top: 15px;">Select User to give Access of Entity</p>
+        <mat-form-field style="width: 400px;">
+            <mat-label>User ID</mat-label>
+            <mat-select [(ngModel)]="selectedValue" name="user">
+                <mat-option *ngFor="let user of allUsers" [value]="user.user_id">
+                    {{user.user_id}} <span style="margin-left: 5px; font-weight: 500;">[ {{user.first_name}}
+                        {{user.last_name}} ]</span>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+    <form>
+        <p style="font-size: medium; font-weight: 500; font-style: italic; margin-top: 15px;">Select Permission Type</p>
+        <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" 
+        [(ngModel)]="Entity"
+        [ngModelOptions]="{standalone: true}">
+            <mat-radio-button class="example-radio-button" *ngFor="let option of Options" [value]="option">
+                {{option == 1 ? "Read Permission" : "Read/Write Permission"}}
+            </mat-radio-button>
+        </mat-radio-group>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button style="margin-left: 20px;" mat-raised-button color="primary" 
+    [disabled]="selectedValue == undefined || Entity == undefined"
+    (click)="assigne(selectedValue,Entity)">Give Access</button>
+    <button mat-raised-button color="primary" (click)="close()">Close</button>
+</mat-dialog-actions>

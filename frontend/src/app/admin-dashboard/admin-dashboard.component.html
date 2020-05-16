@@ -1,0 +1,169 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar>
+      <span class="material-icons">
+        verified_user
+      </span>
+    </div>
+    <mat-card-title>User Files & Folders</mat-card-title>
+
+  </mat-card-header>
+  <mat-card-content>
+    <form>
+      <!-- <h4>mat-select</h4> -->
+      <button mat-button style="color: blue; font-size: small;">* Select UserID to get it's accessed entity</button>
+      <button mat-button style="color: blue; font-size: small;">* Click on
+        <span class="material-icons">
+          autorenew
+          </span>
+        to change user's permission for Files & Folders </button>
+      <mat-form-field style="width: 400px;">
+        <mat-label>User ID</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="user">
+          <mat-option  *ngFor="let user of users" [value]="user.user_id">
+            {{user.user_id}}  <span style="margin-left: 5px; font-weight: 500;">[ {{user.first_name}} {{user.last_name}} ]</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- <p> Selected food: {{selectedValue}} </p> -->
+      <button style="margin-left: 20px;" mat-raised-button color="primary"
+        (click)="GetUserFileFolderTree(selectedValue)">Search</button>
+    </form>
+  </mat-card-content>
+  <mat-tree [dataSource]="dataSource" [treeControl]="treeControl" class="example-tree">
+    <!-- This is the tree node template for leaf nodes -->
+
+    <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+
+      <li class="mat-tree-node">
+        <!-- use a disabled button to provide padding for tree leaf -->
+        <button mat-icon-button>
+        </button>
+        <!-- (click)="openFileDataDialog(node.path_name,node.type,node.name,node.permission_id)" -->
+        <button mat-button>
+          <span class="material-icons">
+            {{node.type == 'Folder' ? 'folder' :'insert_drive_file'}}
+          </span>&ensp;{{node.name}}
+        </button>
+        <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" (click)="PermissionDialog(node)">
+          <mat-icon>autorenew</mat-icon>
+        </button>
+      </li>
+      <!-- use a disabled button to provide padding for tree leaf -->
+
+    </mat-tree-node>
+
+    <!-- This is the tree node template for expandable nodes -->
+    <mat-nested-tree-node *matTreeNodeDef="let node; when: hasChild">
+      <li>
+        <div class="mat-tree-node">
+          <button style="width: 60px;" mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+            </mat-icon>
+          </button>
+          <span class="material-icons">
+            {{node.type == 'Folder' ? 'folder' :'insert_drive_file'}}
+          </span>&ensp;{{node.name}}
+          <button mat-icon-button color="primary" aria-label="Example icon button with a home icon" (click)="PermissionDialog(node)">
+            
+            <mat-icon>autorenew</mat-icon>
+          </button>
+        </div>
+        <ul [class.example-tree-invisible]="!treeControl.isExpanded(node)">
+          <ng-container matTreeNodeOutlet></ng-container>
+        </ul>
+      </li>
+    </mat-nested-tree-node>
+
+  </mat-tree>
+  <!-- <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions> -->
+</mat-card>
+<mat-card class="example-card">
+  <mat-card-header>
+    <!-- <div mat-card-avatar class="example-header-image"></div> -->
+    <div mat-card-avatar style="background-size: cover;">
+      <span class="material-icons">
+        explore
+      </span>
+    </div>
+    <mat-card-title>Files & Folders</mat-card-title>
+    <mat-card-subtitle>All Files & Folders in Root Directory</mat-card-subtitle>
+   
+  </mat-card-header>
+  <mat-card-content>
+    <button mat-button style="color: blue; font-size: small;">* Click on Folder or Files to give access to User's</button>
+      <button mat-button style="color: blue; font-size: small;">* Click on
+        <span class="material-icons">
+          indeterminate_check_box
+          </span>
+        to Delete Files & Folders</button>
+  
+
+    <mat-tree [dataSource]="FileFolderDataSource" [treeControl]="FileFolderTreeControl" class="example-tree">
+      <!-- This is the tree node template for leaf nodes -->
+
+      <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
+
+        <li class="mat-tree-node">
+          <!-- use a disabled button to provide padding for tree leaf -->
+          <button mat-icon-button>
+          </button>
+          <button mat-button (click)="assignDialog(node)">
+            <span class="material-icons">
+              {{node.type == 'Folder' ? 'folder' :'insert_drive_file'}}
+            </span>&ensp;{{node.name}}
+          </button>
+          <button mat-icon-button color="primary" 
+            aria-label="Example icon button with a home icon" [disabled]="node.id==0" (click)="Delete(node)">
+            <!-- (click)="FileFolderOptionDialog(data.user_id,node.path_name,node.id)" -->
+            <mat-icon> indeterminate_check_box</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" [disabled]="node.type=='File'"
+            aria-label="Example icon button with a home icon" 
+            (click)="NewEntity(node)"
+            >
+            <mat-icon>add_circle</mat-icon>
+          </button>
+        </li>
+        <!-- use a disabled button to provide padding for tree leaf -->
+
+      </mat-tree-node>
+
+      <!-- This is the tree node template for expandable nodes -->
+      <mat-nested-tree-node *matTreeNodeDef="let node; when: FileFolderhasChild">
+        <li>
+          <div class="mat-tree-node">
+            <button style="width: 60px;" mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+              <mat-icon class="mat-icon-rtl-mirror">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+            </button><button mat-button (click)="assignDialog(node)">
+              <span class="material-icons">
+                {{node.type == 'Folder' ? 'folder' :'insert_drive_file'}}
+              </span>&ensp;{{node.name}}
+            </button>
+            <button mat-icon-button [disabled]="node.id==0" color="primary" 
+              aria-label="Example icon button with a home icon" (click)="Delete(node)">
+         <mat-icon> indeterminate_check_box</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" [disabled]="node.type=='File'"
+              aria-label="Example icon button with a home icon" 
+             (click)="NewEntity(node)"
+              >
+              <mat-icon>add_circle</mat-icon>
+            </button>
+          </div>
+          <ul [class.example-tree-invisible]="!FileFolderTreeControl.isExpanded(node)">
+            <ng-container matTreeNodeOutlet></ng-container>
+          </ul>
+        </li>
+      </mat-nested-tree-node>
+
+    </mat-tree>
+
+  </mat-card-content>
+</mat-card>

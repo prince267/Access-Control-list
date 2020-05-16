@@ -1,0 +1,25 @@
+<mat-toolbar color="primary">
+  <span class="material-icons">
+    supervised_user_circle
+  </span>
+  <h1>
+    Access Control List
+  </h1>
+  <div class="line"></div>
+  <button mat-button *ngIf="loginService.isAdmin" (click)="openRegisterDialog()">
+    <span class="material-icons">
+      person_add
+    </span>&ensp;New User
+  </button>
+  <h1 *ngIf="loginService.isAdmin" style="margin-left: 250px;">
+    Hello Admin !!!
+  </h1>
+  
+  <button style="position: absolute; right: 0;" *ngIf="loginService.isAuthenticated" mat-button (click)="logout()">
+    <span class="material-icons">
+      exit_to_app
+    </span>
+    Logout</button>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
