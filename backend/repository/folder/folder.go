@@ -60,6 +60,12 @@ func (folder *folderRepository) DeleteFolderInFolderById(cntx context.Context, i
 	return driver.DeleteFolderInFolderById(folder.conn, obj, id)
 }
 
+func (folder *folderRepository) DeleteFolderInFolderByUserId(cntx context.Context, id int64) (sql.Result, error) {
+	obj := &model.NewFolderInFolder{ChildFolderID: id}
+	// return driver.SoftDeleteById(folder.conn, obj, id)
+	return driver.DeleteFolderInFolderByUserId(folder.conn, obj, id)
+}
+
 func (folder *folderRepository) DeleteFolderById(cntx context.Context, id int64) (sql.Result, error) {
 	obj := &model.Folders{FolderID: id}
 	// return driver.SoftDeleteById(folder.conn, obj, id)

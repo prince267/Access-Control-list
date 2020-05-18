@@ -31,6 +31,10 @@ type IHTTPHandler interface {
 	GetFolderUser(http.ResponseWriter, *http.Request)
 	CheckIsFileUser(http.ResponseWriter, *http.Request)
 	CheckIsFolderUser(http.ResponseWriter, *http.Request)
+	DeleteFileInFolderByUserId(http.ResponseWriter, *http.Request)
+	DeleteFolderInFolderByUserId(http.ResponseWriter, *http.Request)
+	DeleteFileInFolderById(http.ResponseWriter, *http.Request)
+	DeleteFolderInFolderById(http.ResponseWriter, *http.Request)
 }
 
 type HTTPHandler struct {
@@ -150,6 +154,22 @@ func (hdlr *HTTPHandler) CheckIsFileUser(http.ResponseWriter, *http.Request) {
 }
 
 func (hdlr *HTTPHandler) CheckIsFolderUser(http.ResponseWriter, *http.Request) {
+	return
+}
+
+func (hdlr *HTTPHandler) DeleteFileInFolderByUserId(http.ResponseWriter, *http.Request) {
+	return
+}
+
+func (hdlr *HTTPHandler) DeleteFileInFolderById(http.ResponseWriter, *http.Request) {
+	return
+}
+
+func (hdlr *HTTPHandler) DeleteFolderInFolderByUserId(http.ResponseWriter, *http.Request) {
+	return
+}
+
+func (hdlr *HTTPHandler) DeleteFolderInFolderById(http.ResponseWriter, *http.Request) {
 	return
 }
 

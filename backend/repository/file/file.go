@@ -96,3 +96,9 @@ func (file *fileRepository) CheckIsFileUser(cntx context.Context, userId int64, 
 	obj := new(model.NewFileInFolder)
 	return driver.CheckIsFileUser(file.conn, obj, userId, fileId)
 }
+
+func (file *fileRepository) DeleteFileInFolderByUserId(cntx context.Context, id int64) (sql.Result, error) {
+	obj := &model.NewFileInFolder{UserID: id}
+	// return driver.SoftDeleteById(file.conn, obj, id)
+	return driver.DeleteFileInFolderByUserId(file.conn, obj, id)
+}

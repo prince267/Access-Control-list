@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/go-chi/chi"
 	"github.com/Access-Control-list/backend/handler"
 	"github.com/Access-Control-list/backend/model"
 	"github.com/Access-Control-list/backend/repository"
 	"github.com/Access-Control-list/backend/repository/file"
+	"github.com/go-chi/chi"
 )
 
 type File struct {
@@ -40,6 +40,7 @@ func (file *File) GetHTTPHandler() []*handler.HTTPHandler {
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodDelete, Path: "file/{id}", Func: file.DeleteFileById},
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodGet, Path: "fileUser/{id}", Func: file.GetFileUser},
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodGet, Path: "fileUser/{id}/{fileId}", Func: file.CheckIsFileUser},
+		&handler.HTTPHandler{Authenticated: true, Method: http.MethodDelete, Path: "FileInFolder/userID/{id}", Func: file.DeleteFileInFolderByUserId},
 	}
 }
 func (file *File) GetAllFiles(w http.ResponseWriter, r *http.Request) {
@@ -180,6 +181,26 @@ func (file *File) DeleteFileInFolderById(w http.ResponseWriter, r *http.Request)
 		}
 
 		_, err = file.repo.DeleteFileInFolderById(r.Context(), id)
+
+		if nil != err {
+			break
+		}
+		payload = "Folder deleted successfully from File In Folder"
+		break
+	}
+
+	handler.WriteJSONResponse(w, r, payload, http.StatusOK, err)
+}
+
+func (file *File) DeleteFileInFolderByUserId(w http.ResponseWriter, r *http.Request) {
+	var payload string
+	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
+	for {
+		if nil != err {
+			break
+		}
+
+		_, err = file.repo.DeleteFileInFolderByUserId(r.Context(), id)
 
 		if nil != err {
 			break

@@ -1394,11 +1394,59 @@ func DeleteFileInFolderById(conn *sql.DB, object model.NewFileInFolderIModel, id
 	return result, err
 }
 
+func DeleteFileInFolderByUserId(conn *sql.DB, object model.NewFileInFolderIModel, id int64) (sql.Result, error) {
+	var queryBuffer bytes.Buffer
+	queryBuffer.WriteString("DELETE FROM ")
+	queryBuffer.WriteString(object.NewFileInFolderTable())
+	queryBuffer.WriteString(" WHERE user_id = ?")
+
+	query := queryBuffer.String()
+	//	log.Println("Delete statement is: %s", query)
+	stmt, err := conn.Prepare(query)
+	if nil != err {
+		log.Printf("Delete Syntax Error: %s\n\tError Query: %s : %s\n",
+			err.Error(), object.String(), query)
+		// return nil, err
+		return nil, err
+	}
+	defer stmt.Close()
+	result, err := stmt.Exec(id)
+	if nil != err {
+		log.Printf("Delete Execute Error: %s\nError Query: %s : %s\n",
+			err.Error(), object.String(), query)
+	}
+	return result, err
+}
+
 func DeleteFolderInFolderById(conn *sql.DB, object model.NewFolderInFolderIModel, id int64) (sql.Result, error) {
 	var queryBuffer bytes.Buffer
 	queryBuffer.WriteString("DELETE FROM ")
 	queryBuffer.WriteString(object.NewFolderInFolderTable())
 	queryBuffer.WriteString(" WHERE child_folder_id = ?")
+
+	query := queryBuffer.String()
+	//	log.Println("Delete statement is: %s", query)
+	stmt, err := conn.Prepare(query)
+	if nil != err {
+		log.Printf("Delete Syntax Error: %s\n\tError Query: %s : %s\n",
+			err.Error(), object.String(), query)
+		return nil, err
+
+	}
+	defer stmt.Close()
+	result, err := stmt.Exec(id)
+	if nil != err {
+		log.Printf("Delete Execute Error: %s\nError Query: %s : %s\n",
+			err.Error(), object.String(), query)
+	}
+	return result, err
+}
+
+func DeleteFolderInFolderByUserId(conn *sql.DB, object model.NewFolderInFolderIModel, id int64) (sql.Result, error) {
+	var queryBuffer bytes.Buffer
+	queryBuffer.WriteString("DELETE FROM ")
+	queryBuffer.WriteString(object.NewFolderInFolderTable())
+	queryBuffer.WriteString(" WHERE user_id = ?")
 
 	query := queryBuffer.String()
 	//	log.Println("Delete statement is: %s", query)

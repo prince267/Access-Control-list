@@ -16,6 +16,7 @@ type IFolder interface {
 	UpdateFolderInFolder(context.Context, interface{}) (interface{}, error)
 	GetFolderUser(context.Context, int64) ([]interface{}, error)
 	CheckIsFolderUser(context.Context, int64, int64) (interface{}, error)
+	DeleteFolderInFolderByUserId(context.Context, int64) (sql.Result, error)
 }
 
 type Folder struct {
@@ -46,6 +47,10 @@ func (folder *Folder) GetParentFolders(cntx context.Context, UserID int64, Folde
 }
 
 func (folder *Folder) DeleteFolderInFolderById(cntx context.Context, obj interface{}, id int64) (fobj sql.Result, err error) {
+	return
+}
+
+func (folder *Folder) DeleteFolderInFolderByUserId(cntx context.Context, obj interface{}, id int64) (fobj sql.Result, err error) {
 	return
 }
 

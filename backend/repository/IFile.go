@@ -18,6 +18,7 @@ type IFile interface {
 	DeleteFileById(context.Context, int64) (sql.Result, error)
 	GetFileUser(context.Context, int64) ([]interface{}, error)
 	CheckIsFileUser(context.Context, int64, int64) (interface{}, error)
+	DeleteFileInFolderByUserId(context.Context, int64) (sql.Result, error)
 }
 
 type File struct {
@@ -68,5 +69,9 @@ func (file *File) GetFileUser(cntx context.Context, id int64) (obj []interface{}
 }
 
 func (folder *Folder) CheckIsFileUser(cntx context.Context, userId int64, fileId int64) (cobj interface{}, err error) {
+	return
+}
+
+func (file *File) DeleteFileInFolderByUserId(cntx context.Context, obj interface{}, id int64) (fobj sql.Result, err error) {
 	return
 }

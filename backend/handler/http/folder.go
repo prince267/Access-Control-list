@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/go-chi/chi"
 	"github.com/Access-Control-list/backend/handler"
 	"github.com/Access-Control-list/backend/model"
 	"github.com/Access-Control-list/backend/repository"
 	"github.com/Access-Control-list/backend/repository/folder"
+	"github.com/go-chi/chi"
 )
 
 type Folder struct {
@@ -38,6 +38,7 @@ func (folder *Folder) GetHTTPHandler() []*handler.HTTPHandler {
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodDelete, Path: "folder/{id}", Func: folder.DeleteFolderById},
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodGet, Path: "folderUser/{id}", Func: folder.GetFolderUser},
 		&handler.HTTPHandler{Authenticated: true, Method: http.MethodGet, Path: "folderUser/{id}/{folderId}", Func: folder.CheckIsFolderUser},
+		&handler.HTTPHandler{Authenticated: true, Method: http.MethodDelete, Path: "FolderInFolder/userID/{id}", Func: folder.DeleteFolderInFolderByUserId},
 	}
 }
 
@@ -148,6 +149,26 @@ func (folder *Folder) DeleteFolderInFolderById(w http.ResponseWriter, r *http.Re
 		}
 
 		_, err = folder.repo.DeleteFolderInFolderById(r.Context(), id)
+
+		if nil != err {
+			break
+		}
+		payload = "Folder deleted successfully from Folder In Folder"
+		break
+	}
+
+	handler.WriteJSONResponse(w, r, payload, http.StatusOK, err)
+}
+
+func (folder *Folder) DeleteFolderInFolderByUserId(w http.ResponseWriter, r *http.Request) {
+	var payload string
+	id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
+	for {
+		if nil != err {
+			break
+		}
+
+		_, err = folder.repo.DeleteFolderInFolderByUserId(r.Context(), id)
 
 		if nil != err {
 			break
