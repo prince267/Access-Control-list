@@ -4,7 +4,6 @@ import { Router } from '@angular/router'
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterDialogComponent } from '../app/DialogComponent/register-dialog/register-dialog.component'
 import { DeleteDialogComponent } from '../app/DialogComponent/delete-dialog/delete-dialog.component'
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -23,10 +22,16 @@ export class AppComponent {
   }
 
   openRegisterDialog() {
-    this.dialog.open(RegisterDialogComponent)
+    const dialogRef=this.dialog.open(RegisterDialogComponent)
+    dialogRef.afterClosed().subscribe(res=>{
+     this.router.navigate['/admin']
+    })
   }
 
   openDeleteDialog(){
-  this.dialog.open(DeleteDialogComponent)
-  }
+  const dialogRef=this.dialog.open(DeleteDialogComponent) 
+  dialogRef.afterClosed().subscribe(res=>{
+    this.router.navigate['/admin']
+   })
+}
 }

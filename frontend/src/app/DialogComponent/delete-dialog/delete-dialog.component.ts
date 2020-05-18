@@ -32,15 +32,21 @@ export class DeleteDialogComponent implements OnInit {
     });
   }
 
-  DeleteUser(userId){
+ async DeleteUser(userId){
     console.log(userId)
+   let FileResponse = await this.dataService.DeleteFileInFolderByUserId(userId)
+   console.log(FileResponse)
+   let FolderResponse= await this.dataService.DeleteFolderInFolderByUserId(userId)
+   console.log(FolderResponse)
+   if(FileResponse.status==200 && FolderResponse.status==200){
     this.dataService.DelteUser(userId).subscribe(res=>{
       console.log(res)
-      this.openSnackBar("File Update", " 🎉")  
+
+      this.openSnackBar("User Delete Successfull", " 🎉")  
+
+    this.dialogRef.close()
     })
-    this.dialogRef.close()
-  }
-  close(){
-    this.dialogRef.close()
+   }
+    
   }
 }

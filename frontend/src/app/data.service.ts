@@ -191,6 +191,18 @@ export class DataService {
     return this.httpClient.delete(this.REST_API_SERVER + "/FolderInFolder/" + id, options)
   }
 
+
+  async DeleteFolderInFolderByUserId(UserId: number) {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    let options = {
+      headers: httpHeaders
+    };
+    const response = this.httpClient.delete<{ status: number, data: any }>(this.REST_API_SERVER + "/FolderInFolder/userID/" + UserId, options).toPromise()
+    return response;
+  }
+
   public DeleteFileInFolderById(id: number) {
     let httpHeaders = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -199,6 +211,18 @@ export class DataService {
       headers: httpHeaders
     };
     return this.httpClient.delete(this.REST_API_SERVER + "/FileInFolder/" + id, options)
+  }
+
+
+  async DeleteFileInFolderByUserId(UserId: number) {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    let options = {
+      headers: httpHeaders
+    };
+    const response = this.httpClient.delete<{ status: number, data: any }>(this.REST_API_SERVER + "/FileInFolder/userID/" + UserId, options).toPromise()
+    return response;
   }
 
   public DeleteFolderById(id: number) {
