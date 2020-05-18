@@ -1,0 +1,22 @@
+<h1 mat-dialog-title style="text-align: center; font-weight: 500;">Delete User</h1>
+<hr>
+<mat-dialog-content style="width: 300px;height: 200px;" class="mat-typography">
+    <form>
+        <p style="font-size: large; font-weight: 500;margin-top: 15px;">Select User to Delete</p>
+        <mat-form-field style="width: 300px;">
+            <mat-label>User ID</mat-label>
+            <mat-select [(ngModel)]="selectedValue" name="user">
+                <mat-option *ngFor="let user of allUsers" [value]="user.user_id">
+                    {{user.user_id}} <span style="margin-left: 5px; font-weight: 500;">[ {{user.first_name}}
+                        {{user.last_name}} ]</span>
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button style="margin-left: 20px;" mat-raised-button color="primary" 
+    [disabled]="selectedValue == undefined"
+    (click)="DeleteUser(selectedValue)">Delete</button>
+    <button mat-raised-button color="primary" (click)="close()">Close</button>
+</mat-dialog-actions>

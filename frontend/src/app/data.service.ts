@@ -70,6 +70,9 @@ export class DataService {
     return response
   }
 
+  public DelteUser(id: number) {
+    return this.httpClient.delete(this.REST_API_SERVER + "/user/" + id)
+  }
 
   public GetFileUser(id: number) {
     return this.httpClient.get(this.REST_API_SERVER + "/fileUser/" + id)
@@ -86,7 +89,7 @@ export class DataService {
 
   public CheckIsFileUser(userId: number, FileId: number) {
     return this.httpClient.get(this.REST_API_SERVER + "/fileUser/" + userId + "/" + FileId)
-  
+
   }
 
   public GetFileData(fileInfo) {

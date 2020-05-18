@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import {LoginService} from './authservice/login.service'
-import {Router} from '@angular/router'
+import { LoginService } from './authservice/login.service'
+import { Router } from '@angular/router'
 import { MatDialog } from '@angular/material/dialog';
-import {RegisterDialogComponent} from '../app/DialogComponent/register-dialog/register-dialog.component'
+import { RegisterDialogComponent } from '../app/DialogComponent/register-dialog/register-dialog.component'
+import { DeleteDialogComponent } from '../app/DialogComponent/delete-dialog/delete-dialog.component'
 
 @Component({
   selector: 'app-root',
@@ -11,18 +12,21 @@ import {RegisterDialogComponent} from '../app/DialogComponent/register-dialog/re
 })
 export class AppComponent {
   title = 'ACL';
-  constructor(public loginService:LoginService,
-    private router:Router,
+  constructor(public loginService: LoginService,
+    private router: Router,
     public dialog: MatDialog,
-    ){}
+  ) { }
 
-  logout(){
-      this.loginService.logout()
+  logout() {
+    this.loginService.logout()
     this.router.navigate(["/"])
-    }
-    
-    openRegisterDialog(){
-      this.dialog.open(RegisterDialogComponent)
-    }
-  
+  }
+
+  openRegisterDialog() {
+    this.dialog.open(RegisterDialogComponent)
+  }
+
+  openDeleteDialog(){
+  this.dialog.open(DeleteDialogComponent)
+  }
 }

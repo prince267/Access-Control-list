@@ -17,6 +17,7 @@ import { ChangePermissionDialogComponent } from './DialogComponent/change-permis
 import { RegisterDialogComponent } from './DialogComponent/register-dialog/register-dialog.component';
 import { AssignUserDialogComponent } from './DialogComponent/assign-user-dialog/assign-user-dialog.component';
 import { AdminFileFolderCreateDialogComponent } from './DialogComponent/admin-file-folder-create-dialog/admin-file-folder-create-dialog.component';
+import { DeleteDialogComponent } from './DialogComponent/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { AdminFileFolderCreateDialogComponent } from './DialogComponent/admin-fi
     ChangePermissionDialogComponent,
     RegisterDialogComponent,
     AssignUserDialogComponent,
-    AdminFileFolderCreateDialogComponent
+    AdminFileFolderCreateDialogComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,

@@ -11,7 +11,12 @@
       person_add
     </span>&ensp;New User
   </button>
-  <h1 *ngIf="loginService.isAdmin" style="margin-left: 250px;">
+  <button mat-button *ngIf="loginService.isAdmin" (click)="openDeleteDialog()">
+    <span class="material-icons">
+      delete
+    </span>&ensp;Delete User
+  </button>
+  <h1 *ngIf="loginService.isAdmin" style="margin-left: 120px;">
     Hello Admin !!!
   </h1>
   
