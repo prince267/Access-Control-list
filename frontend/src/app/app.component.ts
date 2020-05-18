@@ -24,14 +24,14 @@ export class AppComponent {
   openRegisterDialog() {
     const dialogRef=this.dialog.open(RegisterDialogComponent)
     dialogRef.afterClosed().subscribe(res=>{
-     this.router.navigate['/admin']
+      window.location.reload();
     })
   }
 
   openDeleteDialog(){
   const dialogRef=this.dialog.open(DeleteDialogComponent) 
   dialogRef.afterClosed().subscribe(res=>{
-    this.router.navigate['/admin']
+    window.location.reload();
    })
 }
 }
